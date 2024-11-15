@@ -50,20 +50,32 @@ java -jar app/build/libs/App-1.0.0.jar
 ---
 
 ## Project Structure
+
 ```
 MathOperationsApp/
-├── app/
-│   ├── src/               # Source files
-│   │   ├── main/
-│   │   │   └── java/
+├── app/                     # Application-specific code and configuration
+│   ├── src/                 # Source files
+│   │   ├── main/            # Main application code
+│   │   │   └── java/        # Java source files
 │   │   │       └── org/
 │   │   │           └── example/
-│   │   │               └── App.java  # Main class
-│   └── build.gradle.kts   # Gradle build configuration for the app module
-├── settings.gradle.kts    # Multi-module Gradle configuration
-├── gradlew                # Gradle wrapper for UNIX
-├── gradlew.bat            # Gradle wrapper for Windows
-└── README.md              # Project documentation
+│   │   │               └── App.java  # Main application class
+│   │   └── test/            # Test files
+│   │       └── java/
+│   │           └── org/
+│   │               └── example/
+│   │                   └── AppTest.java  # Unit tests
+│   └── build.gradle.kts     # Gradle build configuration for the app module
+├── build/                   # Directory for build outputs (generated)
+├── gradle/                  # Gradle wrapper files
+│   └── wrapper/
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── .gitignore               # Files and directories to ignore in Git
+├── gradlew                  # Gradle wrapper script for UNIX
+├── gradlew.bat              # Gradle wrapper script for Windows
+├── settings.gradle.kts      # Project-level Gradle configuration
+└── README.md                # Project documentation
 ```
 
 ---
