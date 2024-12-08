@@ -1,12 +1,13 @@
 # Math Operations App
 
-A simple command-line application that performs basic mathematical operations (addition, subtraction, multiplication, division) with user input. Built using Java and Gradle.
+A simple command-line application that performs basic mathematical operations (addition, subtraction, multiplication, division) using numbers provided directly via command-line arguments. Built using Java and Gradle.
 
 ---
 
 ## Features
-- **Interactive User Input**: Enter two numbers to see the results of various mathematical operations.
+- **Command-Line Arguments**: Input two numbers and an operation directly on the command line for instant results.
 - **Dependency Management**: Uses Apache Commons Math for precision rounding.
+- **Error Handling**: Provides meaningful error messages for invalid input or unsupported operations.
 - **Automated Build and Run**: Managed entirely with Gradle.
 
 ---
@@ -34,7 +35,7 @@ gradle build
 ### Run the Application
 To execute the program interactively:
 ```bash
-gradle run
+java -jar app/build/libs/App-1.0.0.jar <number1> <operation> <number2>
 ```
 
 ### Create a Deployable JAR
