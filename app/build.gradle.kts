@@ -24,6 +24,21 @@ tasks.named<Test>("test") {
 plugins {
     java
     application
+    id("checkstyle") // Apply the Checkstyle plugin
+    id("pmd") // Apply the PMD plugin
+}
+
+pmd {
+    toolVersion = "7.8.0" // Specify the PMD version
+    ruleSets = listOf("java-basic", "java-design") // Default rule sets
+    isConsoleOutput = true // Print results to console
+    ruleSetFiles = files("config/pmd/ruleset.xml") // Optional custom rules
+}
+
+
+checkstyle {
+    toolVersion = "10.12.0" // Specify the Checkstyle version
+    configFile = file("config/checkstyle/checkstyle.xml") // Path to Checkstyle configuration file
 }
 
 repositories {

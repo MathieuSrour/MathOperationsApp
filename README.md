@@ -66,7 +66,12 @@ MathOperationsApp/
 │   │           └── org/
 │   │               └── example/
 │   │                   └── AppTest.java  # Unit tests
-│   └── build.gradle.kts     # Gradle build configuration for the app module
+│   ├──build.gradle.kts     # Gradle build configuration for the app module
+│   └──config/
+│      ├── checkstyle/ 
+│      │   └──checkstyle.xml
+│      └── pmd/
+│          ruleset.xml
 ├── build/                   # Directory for build outputs (generated)
 ├── gradle/                  # Gradle wrapper files
 │   └── wrapper/
@@ -119,5 +124,50 @@ Unit tests are included and executed with Gradle:
 ```bash
 gradle test
 ```
+
+---
+
+## Static Code Analysis
+
+### Install and Run Analysis
+
+1. **Checkstyle**:
+   - Install Checkstyle by ensuring it is included in `build.gradle.kts`:
+     ```kotlin
+     plugins {
+         id("checkstyle")
+     }
+
+     checkstyle {
+         toolVersion = "10.12.0"
+         configFile = file("config/checkstyle/checkstyle.xml")
+     }
+     ```
+   - Run Checkstyle analysis:
+     ```bash
+     gradle checkstyleMain
+     ```
+   - Output:
+     - Results are displayed in the console and saved as an HTML report in `build/reports/checkstyle/main.html`.
+
+2. **PMD**:
+   - Install PMD by ensuring it is included in `build.gradle.kts`:
+     ```kotlin
+     plugins {
+         id("pmd")
+     }
+
+     pmd {
+         toolVersion = "6.56.0"
+         ruleSetFiles = files("config/pmd/ruleset.xml")
+         isConsoleOutput = true
+     }
+     ```
+   - Run PMD analysis:
+     ```bash
+     gradle pmdMain
+     ```
+   - Output:
+     - Results are displayed in the console and saved as an HTML report in `build/reports/pmd/main.html`.
 
 ---
