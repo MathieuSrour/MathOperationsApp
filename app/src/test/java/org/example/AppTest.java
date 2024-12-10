@@ -3,6 +3,8 @@ package org.example;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
@@ -10,50 +12,49 @@ public class AppTest {
 
     @Test
     public void testAddition() {
-        String[] args = {"10", "+", "5"};
-        String output = executeApp(args);
-        assertTrue(output.trim().contains("Result: 10,00 + 5,00 = 15,00"));
+        double result = App.calculate(10, "+", 5);
+        assertEquals(15.0, result, 0.0001);
     }
 
     @Test
     public void testSubtraction() {
-        String[] args = {"20", "-", "8"};
-        String output = executeApp(args);
-        assertTrue(output.contains("Result: 20,00 - 8,00 = 12,00"));
+        double result = App.calculate(20, "-", 8);
+        assertEquals(12.0, result, 0.0001);
     }
 
     @Test
     public void testMultiplication() {
-        String[] args = {"7", "*", "6"};
-        String output = executeApp(args);
-        assertTrue(output.contains("Result: 7,00 * 6,00 = 42,00"));
+        double result = App.calculate(7, "*", 6);
+        assertEquals(42.0, result, 0.0001);
     }
 
     @Test
     public void testDivision() {
-        String[] args = {"50", "/", "5"};
-        String output = executeApp(args);
-        assertTrue(output.contains("Result: 50,00 / 5,00 = 10,00"));
+        double result = App.calculate(50, "/", 5);
+        assertEquals(10.0, result, 0.0001);
     }
 
     @Test
     public void testDivisionByZero() {
-        String[] args = {"10", "/", "0"};
-        String output = executeApp(args);
-        assertTrue(output.contains("Error: Division by zero is not allowed."));
+        //String[] args = {"10", "/", "0"};
+        //String output = executeApp(args);
+        //assertTrue(output.contains("Error: Division by zero is not allowed."));
+
+        Exception exception = assertThrows(ArithmeticException.class, () -> App.calculate(10, "/", 0));
+        assertEquals("Division by zero is not allowed.", exception.getMessage());
     }
 
     @Test
     public void testInvalidOperation() {
-        String[] args = {"10", "x", "5"};
-        String output = executeApp(args);
-        assertTrue(output.contains("Error: Invalid operation. Use +, -, *, or /."));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> App.calculate(10, "x", 5));
+        assertEquals("Invalid operation. Use +, -, *, or /.", exception.getMessage());
     }
 
     @Test
     public void testInvalidNumber() {
         String[] args = {"abc", "+", "5"};
         String output = executeApp(args);
+        
         assertTrue(output.contains("Error: Both number1 and number2 must be valid numbers."));
     }
 
