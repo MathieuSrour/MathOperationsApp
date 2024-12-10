@@ -29,10 +29,10 @@ plugins {
 }
 
 pmd {
-    toolVersion = "7.8.0" // Specify the PMD version
-    ruleSets = listOf("java-basic", "java-design") // Default rule sets
+    toolVersion = "6.56.0" // Specify the PMD version
+    // ruleSets = listOf("java-basic", "java-design") // Default rule sets
+    ruleSetFiles = files("config/pmd/ruleset.xml") // Optional custom rules   
     isConsoleOutput = true // Print results to console
-    ruleSetFiles = files("config/pmd/ruleset.xml") // Optional custom rules
 }
 
 
@@ -48,6 +48,7 @@ repositories {
 dependencies {
     implementation("org.apache.commons:commons-math3:3.6.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
+    pmd("net.sourceforge.pmd:pmd-dist:7.8.0")
 }
 
 application {

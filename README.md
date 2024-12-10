@@ -171,3 +171,30 @@ gradle test
      - Results are displayed in the console and saved as an HTML report in `build/reports/pmd/main.html`.
 
 ---
+
+## Setting Up Pre-Commit Hooks for Static Code Analysis
+
+### Prerequisites
+- Ensure you have Java and Gradle installed.
+- Ensure the project is cloned locally.
+
+### Step-by-Step Instructions
+
+1. **Copy the Pre-Commit Hook**:
+   - Copy the provided pre-commit hook script to the `.git/hooks/` directory:
+     ```bash
+     cp .githooks/pre-commit .git/hooks/pre-commit
+     chmod +x .git/hooks/pre-commit
+     ```
+
+2. **Verify the Hook**:
+   - The hook automatically runs static code analysis (Checkstyle and PMD) before every commit.
+   - If issues are found, the commit will be blocked with error messages.
+
+3. **Bypass the Hook** (if needed):
+   - Use the `--no-verify` flag to skip the hook:
+     ```bash
+     git commit --no-verify -m "Commit message"
+     ```
+
+---

@@ -14,7 +14,6 @@ public class App {
             String operation = args[1];
             double number2 = Double.parseDouble(args[2]);
             double result;
-
             // Perform the operation
             switch (operation) {
                 case "+":
