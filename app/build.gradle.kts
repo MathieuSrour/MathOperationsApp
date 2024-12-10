@@ -26,6 +26,7 @@ plugins {
     application
     id("checkstyle") // Apply the Checkstyle plugin
     id("pmd") // Apply the PMD plugin
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 pmd {
@@ -49,6 +50,9 @@ dependencies {
     implementation("org.apache.commons:commons-math3:3.6.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
     pmd("net.sourceforge.pmd:pmd-dist:7.8.0")
+    implementation("org.apache.logging.log4j:log4j-core:2.20.0")
+    implementation("org.apache.logging.log4j:log4j-api:2.20.0")
+    //implementation("org.apache.logging.log4j:log4j-jpl:2.20.0")
 }
 
 application {
@@ -60,6 +64,12 @@ tasks.jar {
         attributes(
             "Main-Class" to "org.example.App"
         )
+    }
+}
+
+tasks {
+    shadowJar {
+        archiveClassifier.set("") // Ensures the output file is named without "-all"
     }
 }
 

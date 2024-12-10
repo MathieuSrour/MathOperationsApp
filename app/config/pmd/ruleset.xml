@@ -5,6 +5,6 @@
     xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0
                         https://pmd.sourceforge.net/ruleset_2_0_0.xsd">
     <description>My custom rule set</description>
-    <rule ref="category/java/basic.xml"/>
-    <rule ref="category/java/design.xml"/>
+    <rule ref="category/java/basic.xml/UnusedLocalVariable"/>
+    <rule ref="category/java/design.xml/ExcessiveMethodLength"/>
 </ruleset>

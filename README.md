@@ -197,4 +197,44 @@ gradle test
      git commit --no-verify -m "Commit message"
      ```
 
+
 ---
+
+### Logging with Log4j
+
+This project uses **Log4j** for logging at different levels (INFO, DEBUG, WARN, ERROR). Logs provide insights into the application's execution and help with debugging and monitoring.
+
+#### Configuration
+
+- The Log4j configuration is defined in the `log4j2.xml` file located in the `src/main/resources` directory.
+- Logs are output to:
+  1. **Console**: Displays logs in the terminal.
+  2. **File**: Logs are saved to `logs/app.log`.
+
+#### Building the Application
+
+To ensure that all dependencies (including Log4j) are bundled, build a **fat JAR** using the following Gradle command:
+```bash
+gradle clean shadowJar
+```
+
+The output JAR file will be located in the `build/libs` directory.
+
+#### Running the Application
+
+Run the fat JAR with:
+```bash
+java -jar build/libs/App-1.0.0.jar <number1> <operation> <number2>
+```
+
+#### Example Logs
+
+```
+2024-12-10 15:30:45 [main] INFO  org.example.App - Application started with arguments: [10, +, 5]
+2024-12-10 15:30:45 [main] DEBUG org.example.App - Addition performed: 10.0 + 5.0 = 15.0
+2024-12-10 15:30:45 [main] INFO  org.example.App - Operation successful. Result: 10.0 + 5.0 = 15.0
+2024-12-10 15:30:45 [main] INFO  org.example.App - Application terminated.
+```
+
+---
+
