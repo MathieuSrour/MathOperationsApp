@@ -1,240 +1,83 @@
 # Math Operations App
 
-A simple command-line application that performs basic mathematical operations (addition, subtraction, multiplication, division) using numbers provided directly via command-line arguments. Built using Java and Gradle.
+The **Math Operations App** is a simple command-line application designed to perform basic mathematical operations such as addition, subtraction, multiplication, and division. It enables users to provide inputs directly from the command line, making calculations fast and straightforward.
 
 ---
 
-## Features
-- **Command-Line Arguments**: Input two numbers and an operation directly on the command line for instant results.
-- **Dependency Management**: Uses Apache Commons Math for precision rounding.
-- **Error Handling**: Provides meaningful error messages for invalid input or unsupported operations.
-- **Automated Build and Run**: Managed entirely with Gradle.
+## Description
+This repository contains the source code and configurations for the **Math Operations App**, a Java-based application built using Gradle. The app features structured logging, unit testing, and a well-defined architecture to simplify its use and maintenance.
 
 ---
 
-## Prerequisites
-- **Java Development Kit (JDK)**: Version 11 or later.
-- **Gradle**: Installed on your system. [Installation guide](https://gradle.org/install/).
+## Usage
+The application takes three arguments:
+1. A number.
+2. An operator (`+`, `-`, `*`, or `/`).
+3. Another number.
+
+It then performs the requested operation and displays the result. The app also includes robust error handling for invalid inputs or operations, with detailed logs and error messages.
 
 ---
 
-## Getting Started
+This repository is suitable for:
+- Developers learning Java and Gradle.
+- Students or individuals looking for a basic yet functional calculator example.
+- Engineers needing a template for building and debugging small Java-based CLI tools.
+
+
+
+---
+
+## Installation, Building and Testing The Project
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/MathieuSrour/MathOperationsApp.git
+git clone https://github.com/<your-username>/MathOperationsApp.git
 cd MathOperationsApp
 ```
 
 ### Build the Project
-To compile the application and resolve dependencies:
+To build the application:
 ```bash
-gradle build
+gradle clean clean shadowjar
 ```
 
 ### Run the Application
-To execute the program interactively:
+To execute the program:
 ```bash
-java -jar app/build/libs/App-1.0.0.jar <number1> <operation> <number2>
+java -jar build/libs/App-1.0.0.jar <number1> <operation> <number2>
 ```
-
-### Create a Deployable JAR
-To package the application as a JAR file:
+Example:
 ```bash
-gradle jar
-```
-Run the JAR file:
-```bash
-java -jar app/build/libs/App-1.0.0.jar
+java -jar build/libs/App-1.0.0.jar 10 + 5
 ```
 
----
-
-## Project Structure
-
-```
-MathOperationsApp/
-├── app/                     # Application-specific code and configuration
-│   ├── src/                 # Source files
-│   │   ├── main/            # Main application code
-│   │   │   └── java/        # Java source files
-│   │   │       └── org/
-│   │   │           └── example/
-│   │   │               └── App.java  # Main application class
-│   │   └── test/            # Test files
-│   │       └── java/
-│   │           └── org/
-│   │               └── example/
-│   │                   └── AppTest.java  # Unit tests
-│   ├──build.gradle.kts     # Gradle build configuration for the app module
-│   └──config/
-│      ├── checkstyle/ 
-│      │   └──checkstyle.xml
-│      └── pmd/
-│          ruleset.xml
-├── build/                   # Directory for build outputs (generated)
-├── gradle/                  # Gradle wrapper files
-│   └── wrapper/
-│       ├── gradle-wrapper.jar
-│       └── gradle-wrapper.properties
-├── .gitignore               # Files and directories to ignore in Git
-├── gradlew                  # Gradle wrapper script for UNIX
-├── gradlew.bat              # Gradle wrapper script for Windows
-├── settings.gradle.kts      # Project-level Gradle configuration
-└── README.md                # Project documentation
-```
-
----
-
-## How Gradle is Used in This Project
-
-1. **Dependency Management**:
-   - External libraries (e.g., Apache Commons Math) are automatically managed by Gradle.
-   - Declared in `build.gradle.kts`:
-     ```kotlin
-     dependencies {
-         implementation("org.apache.commons:commons-math3:3.6.1")
-         testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
-     }
-     ```
-
-2. **Compilation**:
-   - Source code is automatically compiled during the `gradle build` process.
-   - Manually trigger compilation with:
-     ```bash
-     gradle compileJava
-     ```
-
-3. **Version Management**:
-   - The project version is defined in `build.gradle.kts`:
-     ```kotlin
-     version = "1.0.0"
-     ```
-
-4. **Packaging**:
-   - Gradle generates a deployable JAR file using the `jar` task:
-     ```bash
-     gradle jar
-     ```
-
----
-
-## Testing
-Unit tests are included and executed with Gradle:
+### Run Unit Tests
+To run the tests and verify functionality:
 ```bash
 gradle test
 ```
 
 ---
 
-## Static Code Analysis
-
-### Install and Run Analysis
-
-1. **Checkstyle**:
-   - Install Checkstyle by ensuring it is included in `build.gradle.kts`:
-     ```kotlin
-     plugins {
-         id("checkstyle")
-     }
-
-     checkstyle {
-         toolVersion = "10.12.0"
-         configFile = file("config/checkstyle/checkstyle.xml")
-     }
-     ```
-   - Run Checkstyle analysis:
-     ```bash
-     gradle checkstyleMain
-     ```
-   - Output:
-     - Results are displayed in the console and saved as an HTML report in `build/reports/checkstyle/main.html`.
-
-2. **PMD**:
-   - Install PMD by ensuring it is included in `build.gradle.kts`:
-     ```kotlin
-     plugins {
-         id("pmd")
-     }
-
-     pmd {
-         toolVersion = "6.56.0"
-         ruleSetFiles = files("config/pmd/ruleset.xml")
-         isConsoleOutput = true
-     }
-     ```
-   - Run PMD analysis:
-     ```bash
-     gradle pmdMain
-     ```
-   - Output:
-     - Results are displayed in the console and saved as an HTML report in `build/reports/pmd/main.html`.
+## Contribution
+You can contribute to this project by:
+1. Reporting issues via GitHub's "Issues" tab.
+2. Suggesting features or improvements.
+3. Submitting pull requests with bug fixes, enhanced functionality, or documentation updates.
+4. Writing additional test cases to improve test coverage.
 
 ---
 
-## Setting Up Pre-Commit Hooks for Static Code Analysis
-
-### Prerequisites
-- Ensure you have Java and Gradle installed.
-- Ensure the project is cloned locally.
-
-### Step-by-Step Instructions
-
-1. **Copy the Pre-Commit Hook**:
-   - Copy the provided pre-commit hook script to the `.git/hooks/` directory:
-     ```bash
-     cp .githooks/pre-commit .git/hooks/pre-commit
-     chmod +x .git/hooks/pre-commit
-     ```
-
-2. **Verify the Hook**:
-   - The hook automatically runs static code analysis (Checkstyle and PMD) before every commit.
-   - If issues are found, the commit will be blocked with error messages.
-
-3. **Bypass the Hook** (if needed):
-   - Use the `--no-verify` flag to skip the hook:
-     ```bash
-     git commit --no-verify -m "Commit message"
-     ```
-
+## License
+This project is licensed under the **MIT License**. See the [LICENSE](https://github.com/MathieuSrour/MathOperationsApp/blob/main/LICENSE.txt) file for more details.
 
 ---
 
-### Logging with Log4j
-
-This project uses **Log4j** for logging at different levels (INFO, DEBUG, WARN, ERROR). Logs provide insights into the application's execution and help with debugging and monitoring.
-
-#### Configuration
-
-- The Log4j configuration is defined in the `log4j2.xml` file located in the `src/main/resources` directory.
-- Logs are output to:
-  1. **Console**: Displays logs in the terminal.
-  2. **File**: Logs are saved to `logs/app.log`.
-
-#### Building the Application
-
-To ensure that all dependencies (including Log4j) are bundled, build a **fat JAR** using the following Gradle command:
-```bash
-gradle clean shadowJar
-```
-
-The output JAR file will be located in the `build/libs` directory.
-
-#### Running the Application
-
-Run the fat JAR with:
-```bash
-java -jar build/libs/App-1.0.0.jar <number1> <operation> <number2>
-```
-
-#### Example Logs
-
-```
-2024-12-10 15:30:45 [main] INFO  org.example.App - Application started with arguments: [10, +, 5]
-2024-12-10 15:30:45 [main] DEBUG org.example.App - Addition performed: 10.0 + 5.0 = 15.0
-2024-12-10 15:30:45 [main] INFO  org.example.App - Operation successful. Result: 10.0 + 5.0 = 15.0
-2024-12-10 15:30:45 [main] INFO  org.example.App - Application terminated.
-```
+## Contact Information
+- **Email**: mathieu.srour4@gmail.com
+- **GitHub Repository**: [Math Operations App](https://github.com/MathieuSrour/MathOperationsApp.git)
+- For questions or issues, please open a ticket in the GitHub Issues tab.
 
 ---
 
