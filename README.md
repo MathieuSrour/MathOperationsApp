@@ -32,7 +32,7 @@ This repository is suitable for:
 
 ### Clone the Repository
 ```bash
-git clone https://github.com/<your-username>/MathOperationsApp.git
+git clone https://github.com/MathieuSrour/MathOperationsApp.git
 cd MathOperationsApp
 ```
 
