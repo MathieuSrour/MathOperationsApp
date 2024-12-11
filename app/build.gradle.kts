@@ -73,4 +73,10 @@ tasks {
     }
 }
 
+tasks.javadoc {
+    source = sourceSets["main"].allJava
+    options.encoding = "UTF-8"
+}
+
+
 version = "1.0.0"
