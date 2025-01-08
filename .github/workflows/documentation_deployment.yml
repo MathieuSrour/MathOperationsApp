@@ -1,0 +1,30 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches:
+      - master # Trigger only on the master branch
+
+jobs:
+  deploy-docs:
+    name: Deploy Documentation to GitHub Pages
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Java 17 (if needed for generating docs)
+      uses: actions/setup-java@v3
+      with:
+        java-version: 17
+        distribution: 'temurin'
+
+    - name: Generate Documentation
+      run: gradle javadoc 
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build/docs/javadoc # Path to the generated documentation
