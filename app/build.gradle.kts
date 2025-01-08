@@ -14,6 +14,11 @@ java {
     }
 }
 
+tasks.named<CreateStartScripts>("startScripts") {
+    dependsOn(tasks.named("shadowJar"))
+}
+
+
 
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
@@ -25,15 +30,7 @@ plugins {
     java
     application
     id("checkstyle") // Apply the Checkstyle plugin
-    id("pmd") // Apply the PMD plugin
     id("com.github.johnrengelman.shadow") version "8.1.1"
-}
-
-pmd {
-    toolVersion = "6.56.0" // Specify the PMD version
-    // ruleSets = listOf("java-basic", "java-design") // Default rule sets
-    ruleSetFiles = files("config/pmd/ruleset.xml") // Optional custom rules   
-    isConsoleOutput = true // Print results to console
 }
 
 
@@ -49,7 +46,6 @@ repositories {
 dependencies {
     implementation("org.apache.commons:commons-math3:3.6.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
-    pmd("net.sourceforge.pmd:pmd-dist:7.8.0")
     implementation("org.apache.logging.log4j:log4j-core:2.20.0")
     implementation("org.apache.logging.log4j:log4j-api:2.20.0")
     //implementation("org.apache.logging.log4j:log4j-jpl:2.20.0")
@@ -67,11 +63,7 @@ tasks.jar {
     }
 }
 
-tasks {
-    shadowJar {
-        archiveClassifier.set("") // Ensures the output file is named without "-all"
-    }
-}
+
 
 tasks.javadoc {
     source = sourceSets["main"].allJava

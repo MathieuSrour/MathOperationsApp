@@ -1,0 +1,8 @@
+2025-01-08 23:37:03 [Test worker] ERROR org.example.App - Invalid number of arguments. Expected 3, got 2
+2025-01-08 23:37:03 [Test worker] DEBUG org.example.App - Multiplication performed: 7.0 * 6.0 = 42.0
+2025-01-08 23:37:03 [Test worker] DEBUG org.example.App - Addition performed: 10.0 + 5.0 = 15.0
+2025-01-08 23:37:03 [Test worker] ERROR org.example.App - Invalid number of arguments. Expected 3, got 4
+2025-01-08 23:37:03 [Test worker] WARN  org.example.App - Invalid number format: For input string: "abc"
+2025-01-08 23:37:03 [Test worker] INFO  org.example.App - Application terminated.
+2025-01-08 23:37:03 [Test worker] DEBUG org.example.App - Division performed: 50.0 / 5.0 = 10.0
+2025-01-08 23:37:03 [Test worker] DEBUG org.example.App - Subtraction performed: 20.0 - 8.0 = 12.0
