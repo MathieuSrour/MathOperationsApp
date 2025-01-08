@@ -1,4 +1,4 @@
-name: test
+name: test with Code Analysis
 
 on:
   push:
@@ -6,10 +6,9 @@ on:
       - main
       - '*'
 
-
 jobs:
-  build-and-test:
-    name: Build and Test
+  build-and-analyze:
+    name: Build, Test, and Analyze Code
     runs-on: ubuntu-latest
 
     strategy:
@@ -39,3 +38,11 @@ jobs:
 
     - name: Run Tests
       run: gradle test --no-daemon
+
+    - name: Run Checkstyle
+      run: gradle checkstyleMain checkstyleTest
+      env:
+        JAVA_HOME: ${{ steps.setup-java.outputs.path }}
+
+    - name: Run SpotBugs
+      run: gradle spotbugsMain spotbugsTest

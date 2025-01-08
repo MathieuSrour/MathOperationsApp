@@ -2,6 +2,8 @@ package org.example;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -51,7 +53,7 @@ public class AppTest {
     }
 
     @Test
-    public void testInvalidNumber() {
+    public void testInvalidNumber() throws UnsupportedEncodingException {
         String[] args = {"abc", "+", "5"};
         String output = executeApp(args);
         
@@ -59,14 +61,14 @@ public class AppTest {
     }
 
     @Test
-    public void testMissingArguments() {
+    public void testMissingArguments() throws UnsupportedEncodingException {
         String[] args = {"10", "+"};
         String output = executeApp(args);
         assertTrue(output.contains("Usage: java -jar App.jar <number1> <operation> <number2>"));
     }
 
     @Test
-    public void testTooManyArguments() {
+    public void testTooManyArguments() throws UnsupportedEncodingException {
         String[] args = {"10", "+", "5", "extra"};
         String output = executeApp(args);
         assertTrue(output.contains("Usage: java -jar App.jar <number1> <operation> <number2>"));
@@ -77,11 +79,12 @@ public class AppTest {
      *
      * @param args Command-line arguments to pass to App.main
      * @return Captured output as a string
+     * @throws UnsupportedEncodingException 
      */
-    private String executeApp(String[] args) {
+    private String executeApp(String[] args) throws UnsupportedEncodingException {
         PrintStream originalOut = System.out;
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
+        System.setOut(new PrintStream(outputStream, true, StandardCharsets.UTF_8.name()));
     
         try {
             App.main(args);
@@ -89,7 +92,7 @@ public class AppTest {
             System.setOut(originalOut);
         }
     
-        String output = outputStream.toString();
+        String output = outputStream.toString(StandardCharsets.UTF_8.name());
         System.out.println("Captured Output: " + output); // Debugging
         return output;
     }

@@ -31,6 +31,9 @@ plugins {
     application
     id("checkstyle") // Apply the Checkstyle plugin
     id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("com.github.spotbugs") version "5.1.3"
+    //id("org.sonarqube") version '4.4.1.3373'
+    //id("org.owasp.dependencycheck") version '8.4.0'
 }
 
 
@@ -72,3 +75,25 @@ tasks.javadoc {
 
 
 version = "1.0.0"
+
+
+spotbugs {
+    toolVersion.set("4.7.3") // Set SpotBugs tool version
+    effort.set(com.github.spotbugs.snom.Effort.MAX)
+    reportLevel.set(com.github.spotbugs.snom.Confidence.LOW)
+}
+
+tasks.named<com.github.spotbugs.snom.SpotBugsTask>("spotbugsMain") {
+    reports.create("html") {
+        required.set(true)
+        outputLocation.set(file("build/reports/spotbugs/spotbugsMain.html"))
+    }
+}
+
+tasks.named<com.github.spotbugs.snom.SpotBugsTask>("spotbugsTest") {
+    reports.create("html") {
+        required.set(true)
+        outputLocation.set(file("build/reports/spotbugs/spotbugsTest.html"))
+    }
+}
+
